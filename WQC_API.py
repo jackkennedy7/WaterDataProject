@@ -1,3 +1,7 @@
+import requests
+import pandas as pd
+from io import StringIO
+
 class WaterQualityClient:
     """Client for https://www.waterqualitydata.us web services"""
 
@@ -46,6 +50,8 @@ class WaterQualityClient:
 
 
 # Using the WaterQualityControl class to make a dataframe:
+client = WaterQualityClient()
+
 params = {
     "countycode":        "US:37:189",       # ← THREE parts: US:stateCode:countyFIPS
     "statecode":         "US:37",           # North Carolina
