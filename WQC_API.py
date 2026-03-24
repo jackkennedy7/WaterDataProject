@@ -43,3 +43,26 @@ class WaterQualityClient:
 
     def close(self):
         self.session.close()
+
+
+# Using the WaterQualityControl class to make a dataframe:
+params = {
+    "countycode":        "US:37:189",       # ← THREE parts: US:stateCode:countyFIPS
+    "statecode":         "US:37",           # North Carolina
+    "startDateLo":       "01-01-2015",      # widen window for richer data
+    "siteType":          "Stream",
+    "sampleMedia":       "Water",
+    # characteristicName instead of pCode; request several analytes at once
+    "characteristicName": [
+        "Dissolved oxygen (DO)",
+        "Temperature, water",
+        "pH",
+        "Specific conductance",
+        "Turbidity",
+        "Nitrate",
+        "Phosphorus",
+    ],
+}
+
+print("Fetching data from WQP …")
+df_raw = client.query_to_dataframe("result", params)
